@@ -1,18 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { Button, Platform, SafeAreaView, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native';
+import { Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Audio } from 'expo-av';
 import Header from './src/components/Header';
 import Timer from './src/components/Timer';
-import {Audio} from 'expo-av';
 
 const colors = [ '#F7DC6F', '#A2D9CE', '#D7BDE2'];
 
 export default function App() {
 
+  const POMODORO_TIME = 25 * 60;
+  const SHORT_BREAK_TIME = 5 * 60;
+  const LONG_BREAK_TIME = 15 * 60;
+
   const [isWorking, setIsWorking] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [time, setTime] = useState(25 * 60);
-  const [currentTime, setCurrentTime] = useState("POMO" | "SHORT" | "BEAK");
+  const [currentTime, setCurrentTime] = useState("POMO" | "SHORT" | "LONG");
 
   useEffect(() => {
     let interval = null;
@@ -30,12 +34,12 @@ export default function App() {
       setIsActive(false);
       setIsWorking((prev) => !prev);
       if(currentTime === 0) {
-        setTime(25 * 60);
+        setTime(POMODORO_TIME);
       } else if(currentTime === 2) {
-        setTime(15 * 60);
+        setTime(LONG_BREAK_TIME);
       }
       else {
-        setTime(5 * 60);
+        setTime(SHORT_BREAK_TIME);
       }
     }
     return () => clearInterval(interval);
