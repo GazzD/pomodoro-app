@@ -71,7 +71,7 @@ export default function App() {
           flex: 1,
           paddingHorizontal: 15,
           paddingTop: Platform.OS === "android" && 30
-      }}
+        }}
       >
         <Text style={styles.titleText}>Pomodoro</Text>
         <Header currentTime={currentTime} setIsActive={setIsActive} setCurrentTime={setCurrentTime} setTime={setTime} />
