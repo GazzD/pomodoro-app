@@ -23,7 +23,7 @@ export default function App() {
     if(isActive) {
       interval = setInterval(() => {
         setTime(time - 1);
-      }, 1);
+      }, 1000);
     }
     else {
       clearInterval(interval);
